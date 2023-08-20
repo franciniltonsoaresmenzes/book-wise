@@ -14,8 +14,6 @@ export const globalStyles = globalCss({
   },
   'body, input, textarea, button': {
     fontFamily: '$default',
-    fontSize: '$md',
-    fontWeight: '$regular',
     '-webkit-font-smoothing': 'antialiased',
     color: '$gray100',
   },
