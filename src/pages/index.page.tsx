@@ -1,10 +1,2 @@
-import { NextSeo } from 'next-seo'
+export { default } from './login'
 
-export default function Home() {
-  return (
-    <>
-      <NextSeo title="Book Wise" />
-      <h1>HelloWord</h1>
-    </>
-  )
-}

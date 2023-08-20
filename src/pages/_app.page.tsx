@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo
+        title="Book Wise"
         openGraph={{
           type: 'website',
           locale: 'en_IE',
