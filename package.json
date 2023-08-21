@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.0.10",
+    "@prisma/client": "^5.1.1",
     "@stitches/react": "^1.2.8",
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
@@ -24,6 +25,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@rocketseat/eslint-config": "^2.1.0"
+    "@rocketseat/eslint-config": "^2.1.0",
+    "prisma": "^5.1.1"
   }
 }
