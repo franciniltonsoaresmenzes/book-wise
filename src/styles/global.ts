@@ -27,6 +27,9 @@ export const globalStyles = globalCss({
   a: {
     textDecoration: 'none',
   },
+  li: {
+    listStyle: 'none',
+  },
   img: {
     pointerEvents: 'none',
     height: 'auto',

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Content } from './styles'
+import { ContainerLayout, ContentLayout } from './styles'
 import { SideBar } from '@/components/SideBar'
 
 type Props = {
@@ -8,9 +8,9 @@ type Props = {
 
 export function DefaultLayout({ children }: Props) {
   return (
-    <Content>
+    <ContainerLayout>
       <SideBar />
-      {children}
-    </Content>
+      <ContentLayout>{children}</ContentLayout>
+    </ContainerLayout>
   )
 }

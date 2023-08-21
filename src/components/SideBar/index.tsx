@@ -1,13 +1,23 @@
+import Image from 'next/image'
+import { SideBarContent, SideBarHeader } from './styles'
+
 export function SideBar() {
   return (
-    <nav>
-      <h3>Logo</h3>
-      <ul>
-        <li>Início</li>
-        <li>Explorar</li>
-        <li>Perfil</li>
-      </ul>
-      <div>Log out</div>
-    </nav>
+    <SideBarContent>
+      <SideBarHeader>
+        <Image
+          src="/logo-md.svg"
+          width={128}
+          height={32}
+          alt="Logo Wise Book"
+        />
+        <ul>
+          <li>Início</li>
+          <li>Explorar</li>
+          <li>Perfil</li>
+        </ul>
+      </SideBarHeader>
+      <footer>Log out</footer>
+    </SideBarContent>
   )
 }
