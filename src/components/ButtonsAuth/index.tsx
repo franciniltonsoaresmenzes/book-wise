@@ -2,11 +2,16 @@ import Image from 'next/image'
 import { Button } from '../Button'
 import { Content } from './styles'
 import { Title } from '../Typography'
+import { signIn } from 'next-auth/react'
 
 export function ButtonsAuth() {
+  async function hanndleConnectAuth() {
+    await signIn('google', { callbackUrl: '/' })
+  }
+
   return (
     <Content>
-      <Button>
+      <Button onClick={hanndleConnectAuth}>
         <Image
           src="/icon/logos_google-icon.svg"
           width={32}
