@@ -3,15 +3,20 @@ import { Button } from '../Button'
 import { Content } from './styles'
 import { Title } from '../Typography'
 import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export function ButtonsAuth() {
-  async function hanndleConnectAuth() {
-    await signIn('google', { callbackUrl: '/' })
+  const router = useRouter()
+  async function hanndleConnectAuth(provides?: string) {
+    await signIn(provides, { callbackUrl: '/' })
+    if (!provides) {
+      await router.push('/')
+    }
   }
 
   return (
     <Content>
-      <Button onClick={hanndleConnectAuth}>
+      <Button onClick={() => hanndleConnectAuth('google')}>
         <Image
           src="/icon/logos_google-icon.svg"
           width={32}
@@ -23,7 +28,7 @@ export function ButtonsAuth() {
         </Title>
       </Button>
 
-      <Button>
+      <Button onClick={() => hanndleConnectAuth('github')}>
         <Image
           src="/icon/akar-icons_github-fill.svg"
           width={32}
@@ -35,7 +40,7 @@ export function ButtonsAuth() {
         </Title>
       </Button>
 
-      <Button>
+      <Button onClick={() => hanndleConnectAuth}>
         <Image
           src="/icon/RocketLaunch.svg"
           width={32}

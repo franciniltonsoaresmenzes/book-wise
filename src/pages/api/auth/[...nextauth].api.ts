@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { PrismaAdapter } from '@/lib/auth/prisma-adapter'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { NextAuthOptions } from 'next-auth'
 import NextAuth from 'next-auth/next'
 import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google'
+import GitHubProvider, { GithubProfile } from 'next-auth/providers/github'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(),
@@ -16,6 +18,18 @@ export const authOptions: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           avatar_url: profile.picture,
+        }
+      },
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID ?? '',
+      clientSecret: process.env.GITHUB_SECRET ?? '',
+      profile: (profile: GithubProfile) => {
+        return {
+          id: String(profile.id),
+          name: profile.name!,
+          email: profile.email!,
+          avatar_url: profile.avatar_url,
         }
       },
     }),
