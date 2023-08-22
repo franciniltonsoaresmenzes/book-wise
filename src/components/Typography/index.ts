@@ -22,6 +22,20 @@ export const Title = styled('h3', {
 
 export const Text = styled('p', {
   fontSize: '$md',
-  fontWeight: '$regular',
   lineHeight: '$base',
+
+  variants: {
+    weight: {
+      bold: {
+        fontSize: '$bold',
+      },
+      regular: {
+        fontWeight: '$regular',
+      },
+    },
+  },
+
+  defaultVariants: {
+    weight: 'regular',
+  },
 })

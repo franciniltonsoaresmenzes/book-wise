@@ -1,28 +1,54 @@
 import Image from 'next/image'
 import { Navigations } from './components/Navigations'
-import { SideBarContent, SideBarHeader } from './styles'
+import {
+  SideBarContent,
+  SideBarHeader,
+  SinInFooter,
+  SinOutFooter,
+} from './styles'
 import { ReactNode } from 'react'
-import { Binoculars, ChartLineUp } from '@phosphor-icons/react'
+import {
+  Binoculars,
+  ChartLineUp,
+  SignIn,
+  SignOut,
+  User,
+} from '@phosphor-icons/react'
+import { Text } from '../Typography'
+import { signOut, useSession } from 'next-auth/react'
+import { Avatar } from '../Avatar'
 
 type NavItemsProps = Array<{
   label: string
   href: string
   icon: ReactNode
 }>
-const navItems: NavItemsProps = [
-  {
-    label: 'Inícion',
-    href: '/',
-    icon: <ChartLineUp size={24} />,
-  },
-  {
-    label: 'Explorar',
-    href: '/explorar',
-    icon: <Binoculars size={24} />,
-  },
-]
-
 export function SideBar() {
+  const { data } = useSession()
+
+  const user = data?.user
+
+  const navItems: NavItemsProps = [
+    {
+      label: 'Inícion',
+      href: '/',
+      icon: <ChartLineUp size={24} />,
+    },
+    {
+      label: 'Explorar',
+      href: '/explorar',
+      icon: <Binoculars size={24} />,
+    },
+  ]
+
+  if (user) {
+    navItems.push({
+      label: 'Profile',
+      href: '/profile',
+      icon: <User size={24} />,
+    })
+  }
+
   return (
     <SideBarContent>
       <SideBarHeader>
@@ -34,7 +60,22 @@ export function SideBar() {
         />
         <Navigations data={navItems} />
       </SideBarHeader>
-      <footer>Log out</footer>
+      <footer>
+        {user ? (
+          <SinOutFooter onClick={() => signOut({ callbackUrl: '/login' })}>
+            <Avatar image={user.avatar_url as string} />
+            <span>{user.name}</span>
+            <SignOut size={20} />
+          </SinOutFooter>
+        ) : (
+          <SinInFooter href="/login">
+            <Text as="span" weight="bold">
+              Fazer Login
+            </Text>
+            <SignIn size={20} />
+          </SinInFooter>
+        )}
+      </footer>
     </SideBarContent>
   )
 }

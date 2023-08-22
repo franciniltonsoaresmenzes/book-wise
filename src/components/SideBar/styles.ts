@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { styled } from '../../../stitches.config'
 
 export const SideBarContent = styled('nav', {
@@ -20,4 +21,30 @@ export const SideBarHeader = styled('div', {
   '> img': {
     marginBottom: '4rem',
   },
+})
+
+export const SinInFooter = styled(Link, {
+  color: '$gray200',
+  '> svg': {
+    color: '$green200',
+  },
+
+  display: 'flex',
+  alignItems: 'center',
+  gap: '$3',
+
+  cursor: 'pointer',
+})
+
+export const SinOutFooter = styled('footer', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: '$3',
+
+  '> svg': {
+    color: '#F75A68',
+  },
+
+  cursor: 'pointer',
 })

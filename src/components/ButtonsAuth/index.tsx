@@ -8,10 +8,12 @@ import { useRouter } from 'next/router'
 export function ButtonsAuth() {
   const router = useRouter()
   async function hanndleConnectAuth(provides?: string) {
-    await signIn(provides, { callbackUrl: '/' })
     if (!provides) {
       await router.push('/')
+      return
     }
+
+    await signIn(provides, { callbackUrl: '/' })
   }
 
   return (
@@ -40,7 +42,7 @@ export function ButtonsAuth() {
         </Title>
       </Button>
 
-      <Button onClick={() => hanndleConnectAuth}>
+      <Button onClick={() => hanndleConnectAuth()}>
         <Image
           src="/icon/RocketLaunch.svg"
           width={32}
