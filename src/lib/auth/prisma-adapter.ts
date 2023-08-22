@@ -8,6 +8,7 @@ export function PrismaAdapter(): Adapter {
       const prismaUser = await prisma.user.create({
         data: {
           name: user.name,
+          email: user.email,
           avatar_url: user.avatar_url,
         },
       })
@@ -16,7 +17,7 @@ export function PrismaAdapter(): Adapter {
         id: prismaUser.id,
         name: prismaUser.name,
         email: '',
-        avatar_url: prismaUser.avatar_url ?? '',
+        avatar_url: prismaUser.avatar_url!,
         emailVerified: null,
       }
     },
@@ -30,7 +31,25 @@ export function PrismaAdapter(): Adapter {
         id: user.id,
         name: user.name,
         email: '',
-        avatar_url: user.avatar_url ?? '',
+        avatar_url: user.avatar_url!,
+        emailVerified: null,
+      }
+    },
+
+    async getUserByEmail(email) {
+      const user = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      })
+
+      if (!user) return null
+
+      return {
+        id: user.id,
+        name: user.name,
+        email: '',
+        avatar_url: user.avatar_url!,
         emailVerified: null,
       }
     },
@@ -56,7 +75,7 @@ export function PrismaAdapter(): Adapter {
         id: user.id,
         name: user.name,
         email: '',
-        avatar_url: user.avatar_url ?? '',
+        avatar_url: user.avatar_url!,
         emailVerified: null,
       }
     },
@@ -74,7 +93,7 @@ export function PrismaAdapter(): Adapter {
         id: prismaUser.id,
         name: prismaUser.name,
         email: '',
-        avatar_url: prismaUser.avatar_url ?? '',
+        avatar_url: prismaUser.avatar_url!,
         emailVerified: null,
       }
     },
