@@ -4,9 +4,14 @@ import { NextPageWithLayout } from '../_app.page'
 import { HeaderTitle, Title } from '@/components/UI/Typography'
 import { ChartLineUp } from '@phosphor-icons/react'
 import { ContentHome } from './styles'
-import { BookRecents } from './components/BookRecents'
+import { BookRecents } from '../../components/BookRecents'
+import { useSession } from 'next-auth/react'
 
 const Home: NextPageWithLayout = () => {
+  const { data } = useSession()
+
+  const user = data?.user
+
   return (
     <>
       <HeaderTitle>
@@ -14,9 +19,7 @@ const Home: NextPageWithLayout = () => {
         <Title>Início</Title>
       </HeaderTitle>
       <ContentHome>
-        <div>
-          <BookRecents />
-        </div>
+        <div>{user && <BookRecents />}</div>
         <div></div>
       </ContentHome>
     </>

@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import { HeaderSubTitle } from '../../styles'
+import { HeaderSubTitle } from '../../pages/home/styles'
 import { ContentRecent } from './styles'
 import { CaretRight } from '@phosphor-icons/react'
+import { CardRecent } from '../CardRecent'
 
 export function BookRecents() {
   return (
@@ -13,6 +14,7 @@ export function BookRecents() {
           <CaretRight size={16} />
         </Link>
       </HeaderSubTitle>
+      <CardRecent />
     </ContentRecent>
   )
 }
