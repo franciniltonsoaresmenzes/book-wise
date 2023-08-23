@@ -14,7 +14,7 @@ import {
   SignOut,
   User,
 } from '@phosphor-icons/react'
-import { Text } from '../Typography'
+import { Text } from '../UI/Typography'
 import { signOut, useSession } from 'next-auth/react'
 import { Avatar } from '../Avatar'
 

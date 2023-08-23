@@ -1,5 +1,5 @@
 import { Navigation } from '@/components/Navigation'
-import { Text } from '@/components/Typography'
+import { Text } from '@/components/UI/Typography'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 

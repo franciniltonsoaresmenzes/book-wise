@@ -12,5 +12,7 @@ export const ContainerLayout = styled('div', {
 })
 
 export const ContentLayout = styled('main', {
-  backgroundColor: 'red',
+  paddingTop: '3.25rem',
+  maxWidth: '62.25rem',
+  width: '100%',
 })

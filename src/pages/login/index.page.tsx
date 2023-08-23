@@ -1,4 +1,4 @@
-import { Text, Title } from '@/components/Typography'
+import { Text, Title } from '@/components/UI/Typography'
 import { Blur, Container, ContentLogin, ContentLogo, FormLogin } from './styles'
 import { ButtonsAuth } from '@/components/ButtonsAuth'
 

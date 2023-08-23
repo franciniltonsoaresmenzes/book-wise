@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import { Button } from '../Button'
+import { Button } from '../UI/Button'
 import { Content } from './styles'
-import { Title } from '../Typography'
+import { Title } from '../UI/Typography'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
