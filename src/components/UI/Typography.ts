@@ -21,7 +21,6 @@ export const Title = styled('h3', {
 })
 
 export const Text = styled('p', {
-  fontSize: '$md',
   lineHeight: '$base',
 
   variants: {
@@ -33,10 +32,19 @@ export const Text = styled('p', {
         fontWeight: '$regular',
       },
     },
+    size: {
+      xs: { fontSize: '$xs' },
+      sm: { fontSize: '$sm' },
+      md: { fontSize: '$md' },
+      lg: { fontSize: '$lg' },
+      xl: { fontSize: '$xl' },
+      '2xl': { fontSize: '$2xl' },
+    },
   },
 
   defaultVariants: {
     weight: 'regular',
+    size: 'md',
   },
 })
 

@@ -1,4 +1,5 @@
 import { Star } from '@phosphor-icons/react'
+import { Content } from './styles'
 
 type Props = {
   rating: number
@@ -12,7 +13,7 @@ export function StartRating({ rating }: Props) {
   const re = Array.from({ length: 5 - rating })
 
   return (
-    <div>
+    <Content>
       {numer.map((_, i) => (
         <Star key={i} weight="fill" size={16} />
       ))}
@@ -20,6 +21,6 @@ export function StartRating({ rating }: Props) {
       {re.map((_, i) => (
         <Star key={i} size={16} />
       ))}
-    </div>
+    </Content>
   )
 }

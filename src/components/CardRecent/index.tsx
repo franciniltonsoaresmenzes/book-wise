@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import { Content, Header } from './styles'
+import { Content, Header, Description } from './styles'
 import { StartRating } from '../StarRating'
-import { Title } from '../UI/Typography'
+import { Text, Title } from '../UI/Typography'
 
 export function CardRecent() {
   return (
@@ -14,18 +14,22 @@ export function CardRecent() {
       />
       <div>
         <Header>
-          <span>Há 2 dias</span>
+          <Text as="span">Há 2 dias</Text>
           <StartRating rating={4} />
         </Header>
         <div>
-          <Title size="xl">Entendendo Algoritmos</Title>
-          Aditya Bhargava
+          <Title size="md">Entendendo Algoritmos</Title>
+          <Text as="span" size="sm">
+            Aditya Bhargava
+          </Text>
         </div>
 
-        <div>
+        <Description>
           Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.
-          Penatibus id vestibulum imperdiet a at imperdiet lectu...
-        </div>
+          Penatibus id vestibulum imperdiet a at imperdiet lectu Lorem ipsum
+          dolor sit amet, qui minim labore adipisicing minim sint cillum sint
+          consectetur cupidatat.
+        </Description>
       </div>
     </Content>
   )
