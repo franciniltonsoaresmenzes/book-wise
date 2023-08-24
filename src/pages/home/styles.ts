@@ -11,3 +11,9 @@ export const HeaderSubTitle = styled('div', {
   alignItems: 'center',
   justifyContent: 'space-between',
 })
+
+export const MainPrincipal = styled('section', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2.5rem',
+})

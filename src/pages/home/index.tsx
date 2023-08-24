@@ -1,11 +1,12 @@
 import { DefaultLayout } from '@/layout/DefaultLayout'
 import { ReactElement } from 'react'
 import { NextPageWithLayout } from '../_app.page'
-import { HeaderTitle, Title } from '@/components/UI/Typography'
+import { HeaderTitle, Text, Title } from '@/components/UI/Typography'
 import { ChartLineUp } from '@phosphor-icons/react'
-import { ContentHome } from './styles'
+import { ContentHome, MainPrincipal } from './styles'
 import { BookRecents } from '../../components/BookRecents'
 import { useSession } from 'next-auth/react'
+import { BooksReviews } from '@/components/BooksReviews'
 
 const Home: NextPageWithLayout = () => {
   const { data } = useSession()
@@ -19,7 +20,10 @@ const Home: NextPageWithLayout = () => {
         <Title>Início</Title>
       </HeaderTitle>
       <ContentHome>
-        <div>{user && <BookRecents />}</div>
+        <MainPrincipal>
+          {user && <BookRecents />}
+          <BooksReviews />
+        </MainPrincipal>
         <div></div>
       </ContentHome>
     </>
