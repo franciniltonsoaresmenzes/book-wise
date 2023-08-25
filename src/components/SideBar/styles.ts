@@ -1,11 +1,22 @@
 import Link from 'next/link'
 import { styled } from '../../../stitches.config'
 
+export const SideBarRoot = styled('div', {
+  position: 'relative',
+  width: '100%',
+  height: '95vh',
+})
+
 export const SideBarContent = styled('nav', {
   background: 'url(/background-sidebar.png) no-repeat center',
   width: '100%',
-  height: 'calc(100% - 40px)',
+  maxWidth: 232,
+  height: '95vh',
   borderRadius: '12px',
+
+  position: 'fixed',
+  top: 20,
+  left: 20,
 
   paddingTop: 40,
   paddingBottom: 24,

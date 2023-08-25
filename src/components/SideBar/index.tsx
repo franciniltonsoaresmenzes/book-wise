@@ -3,6 +3,7 @@ import { Navigations } from './components/Navigations'
 import {
   SideBarContent,
   SideBarHeader,
+  SideBarRoot,
   SinInFooter,
   SinOutFooter,
 } from './styles'
@@ -50,32 +51,34 @@ export function SideBar() {
   }
 
   return (
-    <SideBarContent>
-      <SideBarHeader>
-        <Image
-          src="/logo-md.svg"
-          width={128}
-          height={32}
-          alt="Logo Wise Book"
-        />
-        <Navigations data={navItems} />
-      </SideBarHeader>
-      <footer>
-        {user ? (
-          <SinOutFooter onClick={() => signOut({ callbackUrl: '/login' })}>
-            <Avatar image={user.avatar_url as string} />
-            <span>{user.name}</span>
-            <SignOut size={20} />
-          </SinOutFooter>
-        ) : (
-          <SinInFooter href="/login">
-            <Text as="span" weight="bold">
-              Fazer Login
-            </Text>
-            <SignIn size={20} />
-          </SinInFooter>
-        )}
-      </footer>
-    </SideBarContent>
+    <SideBarRoot>
+      <SideBarContent>
+        <SideBarHeader>
+          <Image
+            src="/logo-md.svg"
+            width={128}
+            height={32}
+            alt="Logo Wise Book"
+          />
+          <Navigations data={navItems} />
+        </SideBarHeader>
+        <footer>
+          {user ? (
+            <SinOutFooter onClick={() => signOut({ callbackUrl: '/login' })}>
+              <Avatar image={user.avatar_url as string} />
+              <span>{user.name}</span>
+              <SignOut size={20} />
+            </SinOutFooter>
+          ) : (
+            <SinInFooter href="/login">
+              <Text as="span" weight="bold">
+                Fazer Login
+              </Text>
+              <SignIn size={20} />
+            </SinInFooter>
+          )}
+        </footer>
+      </SideBarContent>
+    </SideBarRoot>
   )
 }
