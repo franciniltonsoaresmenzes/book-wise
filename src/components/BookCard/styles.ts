@@ -11,6 +11,10 @@ export const HeaderCard = styled('header', {
 export const Author = styled('div', {
   display: 'flex',
   gap: '1rem',
+
+  '> span': {
+    color: '$gray400',
+  },
 })
 
 export const ContentCard = styled('div', {

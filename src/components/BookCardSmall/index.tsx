@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { StartRating } from '../StarRating'
-import { Text, Title } from '../UI/Typography'
+import { SmallText, Text, Title } from '../UI/Typography'
 import { Content, Description } from './styles'
 
 export function BookCardSmall() {
@@ -15,9 +15,7 @@ export function BookCardSmall() {
       <Description>
         <div>
           <Title size="md">Entendendo Algoritmos</Title>
-          <Text as="span" size="sm">
-            Aditya Bhargava
-          </Text>
+          <SmallText>Aditya Bhargava</SmallText>
         </div>
         <StartRating rating={4} />
       </Description>

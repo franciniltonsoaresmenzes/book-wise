@@ -48,6 +48,13 @@ export const Text = styled('p', {
   },
 })
 
+export const SmallText = styled('span', {
+  color: '$gray400',
+  fontWeight: '$regular',
+  fontSize: '0.875rem',
+  lineHeight: '$base',
+})
+
 export const HeaderTitle = styled('div', {
   display: 'flex',
   alignItems: 'center',

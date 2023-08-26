@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Avatar } from '../Avatar'
 import { StartRating } from '../StarRating'
 import { Box } from '../UI/Box'
-import { Text } from '../UI/Typography'
+import { SmallText, Text, Title } from '../UI/Typography'
 import { HeaderCard, ContentCard, DescriptionBook, Author } from './styles'
 
 export function BookCard() {
@@ -13,7 +13,7 @@ export function BookCard() {
           <Avatar image="null" />
           <div>
             <Text>Jaxson Dias</Text>
-            <Text as="span">Hoje</Text>
+            <SmallText>Hoje</SmallText>
           </div>
         </Author>
         <StartRating rating={4} />
@@ -28,8 +28,8 @@ export function BookCard() {
         />
         <div>
           <div>
-            <Text>O Hobbit</Text>
-            <Text as="span">J.R.R. Tolkien</Text>
+            <Title size="md">Entendendo Algoritmos</Title>
+            <SmallText>J.R.R. Tolkien</SmallText>
           </div>
           <DescriptionBook>
             Semper et sapien proin vitae nisi. Feugiat neque integer donec et
