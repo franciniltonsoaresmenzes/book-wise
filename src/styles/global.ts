@@ -21,9 +21,7 @@ export const globalStyles = globalCss({
     cursor: 'pointer',
     border: 0,
   },
-  'input:focus': {
-    boxShadow: '0 0 0 1px $colors$green200',
-  },
+
   a: {
     textDecoration: 'none',
   },
