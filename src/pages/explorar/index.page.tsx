@@ -4,8 +4,10 @@ import { NextPageWithLayout } from '../_app.page'
 import { Title } from '@/components/UI/Typography'
 import { Binoculars } from '@phosphor-icons/react'
 import { Tags } from '@/components/Tags'
-import { ContentTags, HeaderTitle, TitlePrincipal } from './styles'
+import { ContentBook, ContentTags, HeaderTitle, TitlePrincipal } from './styles'
 import { InputSearch } from '@/components/InputSearch'
+import { Box } from '@/components/UI/Box'
+import { BookInfo } from '@/components/BookInfo'
 
 type TagsProps = {
   label: string
@@ -47,6 +49,7 @@ const tags: TagsProps[] = [
 ]
 
 const Explorar: NextPageWithLayout = () => {
+  const length = Array.from({ length: 15 })
   return (
     <>
       <HeaderTitle>
@@ -63,6 +66,11 @@ const Explorar: NextPageWithLayout = () => {
           </Tags>
         ))}
       </ContentTags>
+      <ContentBook>
+        {length.map((_, i) => (
+          <BookInfo key={i} />
+        ))}
+      </ContentBook>
     </>
   )
 }

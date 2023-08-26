@@ -3,19 +3,19 @@ import { StartRating } from '../StarRating'
 import { SmallText, Title } from '../UI/Typography'
 import { Content, Description } from './styles'
 
-export function BookCardSmall() {
+export function BookInfo() {
   return (
     <Content variant="small">
       <Image
         src="/images/books/entendendo-algoritmos.png"
-        width={64}
-        height={92}
+        width={108}
+        height={152}
         alt="Imagen do Livro"
       />
       <Description>
         <div>
           <Title size="md">Entendendo Algoritmos</Title>
-          <SmallText>Aditya Bhargava</SmallText>
+          <SmallText>George Orwell</SmallText>
         </div>
         <StartRating rating={4} />
       </Description>

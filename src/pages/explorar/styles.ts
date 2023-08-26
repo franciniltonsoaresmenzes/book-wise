@@ -20,3 +20,10 @@ export const HeaderTitle = styled('div', {
   display: 'flex',
   justifyContent: 'space-between',
 })
+
+export const ContentBook = styled('section', {
+  marginTop: '3rem',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(279px, 1fr))',
+  gap: '1.25rem',
+})
