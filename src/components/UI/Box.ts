@@ -18,6 +18,9 @@ export const Box = styled('div', {
         background: '$gray600',
         padding: '1.25rem',
       },
+      small: {
+        padding: '1rem 1.25rem',
+      },
     },
   },
 })

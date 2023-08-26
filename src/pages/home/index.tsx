@@ -1,12 +1,13 @@
-import { DefaultLayout } from '@/layout/DefaultLayout'
-import { ReactElement } from 'react'
-import { NextPageWithLayout } from '../_app.page'
-import { HeaderTitle, Text, Title } from '@/components/UI/Typography'
-import { ChartLineUp } from '@phosphor-icons/react'
-import { ContentHome, MainPrincipal } from './styles'
-import { BookRecents } from '../../components/BookRecents'
-import { useSession } from 'next-auth/react'
 import { BooksReviews } from '@/components/BooksReviews'
+import { HeaderTitle, Title } from '@/components/UI/Typography'
+import { DefaultLayout } from '@/layout/DefaultLayout'
+import { ChartLineUp } from '@phosphor-icons/react'
+import { useSession } from 'next-auth/react'
+import { ReactElement } from 'react'
+import { BookRecents } from '../../components/BookRecents'
+import { NextPageWithLayout } from '../_app.page'
+import { ContentHome, MainPrincipal } from './styles'
+import { RatedBook } from '@/components/RatedBooks'
 
 const Home: NextPageWithLayout = () => {
   const { data } = useSession()
@@ -24,7 +25,9 @@ const Home: NextPageWithLayout = () => {
           {user && <BookRecents />}
           <BooksReviews />
         </MainPrincipal>
-        <div></div>
+        <div>
+          <RatedBook />
+        </div>
       </ContentHome>
     </>
   )
