@@ -1,13 +1,14 @@
-import { DefaultLayout } from '@/layout/DefaultLayout'
-import { ReactElement } from 'react'
-import { NextPageWithLayout } from '../_app.page'
-import { Title } from '@/components/UI/Typography'
-import { Binoculars } from '@phosphor-icons/react'
-import { Tags } from '@/components/Tags'
-import { ContentBook, ContentTags, HeaderTitle, TitlePrincipal } from './styles'
-import { InputSearch } from '@/components/InputSearch'
-import { Box } from '@/components/UI/Box'
+import * as Dialog from '@radix-ui/react-dialog'
 import { BookInfo } from '@/components/BookInfo'
+import { InputSearch } from '@/components/InputSearch'
+import { SidePanel } from '@/components/SidePanel'
+import { Tags } from '@/components/Tags'
+import { Title } from '@/components/UI/Typography'
+import { DefaultLayout } from '@/layout/DefaultLayout'
+import { Binoculars } from '@phosphor-icons/react'
+import { ReactElement, useState } from 'react'
+import { NextPageWithLayout } from '../_app.page'
+import { ContentBook, ContentTags, HeaderTitle, TitlePrincipal } from './styles'
 
 type TagsProps = {
   label: string
@@ -39,10 +40,6 @@ const tags: TagsProps[] = [
     selected: false,
   },
   {
-    label: 'Ficção científica',
-    selected: false,
-  },
-  {
     label: 'Suspense',
     selected: false,
   },
@@ -50,6 +47,7 @@ const tags: TagsProps[] = [
 
 const Explorar: NextPageWithLayout = () => {
   const length = Array.from({ length: 15 })
+  const [isSelected, setIsSelected] = useState('Tudo')
   return (
     <>
       <HeaderTitle>
@@ -61,15 +59,23 @@ const Explorar: NextPageWithLayout = () => {
       </HeaderTitle>
       <ContentTags>
         {tags.map((tag) => (
-          <Tags key={tag.label} selected={tag.selected}>
+          <Tags
+            key={tag.label}
+            selected={isSelected === tag.label}
+            onClick={() => setIsSelected(tag.label)}
+          >
             {tag.label}
           </Tags>
         ))}
       </ContentTags>
       <ContentBook>
-        {length.map((_, i) => (
-          <BookInfo key={i} />
-        ))}
+        <Dialog.Root>
+          {length.map((_, i) => (
+            <BookInfo key={i} />
+          ))}
+
+          <SidePanel />
+        </Dialog.Root>
       </ContentBook>
     </>
   )

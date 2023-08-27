@@ -1,14 +1,15 @@
+import { ButtonHTMLAttributes } from 'react'
 import { Text } from '../UI/Typography'
 import { Content } from './styles'
 
-type Props = {
+type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: string
   selected?: boolean
 }
 
-export function Tags({ children, selected = false }: Props) {
+export function Tags({ children, selected = false, ...props }: Props) {
   return (
-    <Content seleted={selected}>
+    <Content seleted={selected} {...props}>
       <Text>{children}</Text>
     </Content>
   )
