@@ -1,6 +1,7 @@
 import { styled } from '../../../stitches.config'
+import LinkNext from 'next/link'
 
-export const Content = styled('div', {
+export const Link = styled(LinkNext, {
   display: 'flex',
   padding: '4px 8px',
   gap: '0.5rem',

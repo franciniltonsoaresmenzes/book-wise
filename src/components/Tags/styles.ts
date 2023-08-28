@@ -20,7 +20,7 @@ export const Content = styled('button', {
       true: {
         background: '$purple200',
         color: '$gray100',
-        border: 'none',
+        border: 'transparent',
       },
     },
   },

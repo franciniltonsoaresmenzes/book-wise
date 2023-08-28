@@ -2,6 +2,8 @@ import { styled } from '../../../stitches.config'
 
 export const ContainerLayout = styled('div', {
   width: '100%',
+  maxWidth: 1440,
+  margin: 'auto',
   height: '100vh',
   padding: '$5',
 

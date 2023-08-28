@@ -18,6 +18,7 @@ export const globalStyles = globalCss({
     color: '$gray100',
   },
   button: {
+    background: 'none',
     cursor: 'pointer',
     border: 0,
   },
