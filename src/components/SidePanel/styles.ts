@@ -1,5 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { styled } from '../../../stitches.config'
+import { Box } from '../UI/Box'
 
 export const Content = styled(Dialog.Content, {
   position: 'fixed',

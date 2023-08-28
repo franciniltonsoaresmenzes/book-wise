@@ -51,8 +51,21 @@ export const Text = styled('p', {
 export const SmallText = styled('span', {
   color: '$gray400',
   fontWeight: '$regular',
-  fontSize: '0.875rem',
   lineHeight: '$base',
+  variants: {
+    size: {
+      xs: { fontSize: '$xs' },
+      sm: { fontSize: '$sm' },
+      md: { fontSize: '$md' },
+      lg: { fontSize: '$lg' },
+      xl: { fontSize: '$xl' },
+      '2xl': { fontSize: '$2xl' },
+    },
+  },
+
+  defaultVariants: {
+    size: 'sm',
+  },
 })
 
 export const HeaderTitle = styled('div', {

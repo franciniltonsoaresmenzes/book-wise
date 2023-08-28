@@ -1,7 +1,7 @@
-import * as Dialog from '@radix-ui/react-dialog'
 import { X } from '@phosphor-icons/react'
-import { Box } from '../UI/Box'
+import * as Dialog from '@radix-ui/react-dialog'
 import { Close, Content, Overlay } from './styles'
+import { BookDetail } from '../BookDetail'
 
 export function SidePanel() {
   return (
@@ -10,7 +10,7 @@ export function SidePanel() {
         <Close>
           <X size={24} />
         </Close>
-        <Box></Box>
+        <BookDetail />
       </Content>
       <Overlay />
     </Dialog.Portal>
