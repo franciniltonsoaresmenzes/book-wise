@@ -1,35 +1,47 @@
 import Image from 'next/image'
-import { Content, Header, Description } from './styles'
 import { StartRating } from '../StarRating'
 import { Text, Title } from '../UI/Typography'
+import { Content, Description, Header } from './styles'
 
-export function CardRecent() {
+type CardRecentProps = {
+  id: string
+  rate: number
+  created_at: string
+  book: {
+    id: string
+    name: string
+    author: string
+    summary: string
+    cover_url: string
+  }
+}
+
+type Props = {
+  data: CardRecentProps
+}
+
+export function CardRecent({ data }: Props) {
   return (
     <Content variant="secundary">
       <Image
-        src="/images/books/entendendo-algoritmos.png"
+        src={data.book.cover_url}
         width={108}
         height={152}
         alt="Imagen do Livro"
       />
       <div>
         <Header>
-          <Text as="span">Há 2 dias</Text>
-          <StartRating rating={4} />
+          <Text as="span">{data.created_at}</Text>
+          <StartRating rating={data.rate} />
         </Header>
         <div>
-          <Title size="md">Entendendo Algoritmos</Title>
+          <Title size="md">{data.book.name}</Title>
           <Text as="span" size="sm">
             Aditya Bhargava
           </Text>
         </div>
 
-        <Description>
-          Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.
-          Penatibus id vestibulum imperdiet a at imperdiet lectu Lorem ipsum
-          dolor sit amet, qui minim labore adipisicing minim sint cillum sint
-          consectetur cupidatat.
-        </Description>
+        <Description>{data.book.summary}</Description>
       </div>
     </Content>
   )

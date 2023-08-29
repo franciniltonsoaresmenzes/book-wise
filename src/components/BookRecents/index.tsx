@@ -4,8 +4,37 @@ import { CardRecent } from '../CardRecent'
 import { Link } from '../UI/Link'
 import { Text } from '../UI/Typography'
 import { ContentRecent } from './styles'
+import { useQuery } from '@tanstack/react-query'
+import { api } from '@/lib/axios'
+
+type BookCardProps = {
+  id: string
+  rate: number
+  created_at: string
+  book: {
+    id: string
+    name: string
+    author: string
+    summary: string
+    cover_url: string
+  }
+}
+
+type Rating = {
+  rating: BookCardProps[]
+}
 
 export function BookRecents() {
+  const { data } = useQuery({
+    queryKey: ['rating/lastest-user'],
+    queryFn: async () => {
+      const resposne = await api.get<Rating>('/rating/user-latest')
+      return resposne.data
+    },
+  })
+
+  const rating = data?.rating ? data.rating : []
+
   return (
     <ContentRecent>
       <HeaderSubTitle>
@@ -15,7 +44,9 @@ export function BookRecents() {
           <CaretRight size={16} />
         </Link>
       </HeaderSubTitle>
-      <CardRecent />
+      {rating.map((book) => (
+        <CardRecent key={book.id} data={book} />
+      ))}
     </ContentRecent>
   )
 }
