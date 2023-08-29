@@ -5,49 +5,54 @@ import { Box } from '../UI/Box'
 import { SmallText, Text, Title } from '../UI/Typography'
 import { HeaderCard, ContentCard, DescriptionBook, Author } from './styles'
 
-export function BookCard() {
+type BookCardProps = {
+  id: string
+  rate: number
+  created_at: string
+  book: {
+    id: string
+    name: string
+    author: string
+    summary: string
+    cover_url: string
+  }
+  user: {
+    name: string
+    avatar_url: string
+  }
+}
+
+type Props = {
+  data: BookCardProps
+}
+
+export function BookCard({ data }: Props) {
   return (
     <Box>
       <HeaderCard>
         <Author>
-          <Avatar image="null" />
+          <Avatar image={data.user.avatar_url} />
           <div>
-            <Text>Jaxson Dias</Text>
-            <SmallText>Hoje</SmallText>
+            <Text>{data.user.name}</Text>
+            <SmallText>{data.created_at}</SmallText>
           </div>
         </Author>
-        <StartRating rating={4} />
+        <StartRating rating={data.rate} />
       </HeaderCard>
 
       <ContentCard>
         <Image
-          src="/images/books/entendendo-algoritmos.png"
+          src={data.book.cover_url}
           width={108}
           height={152}
           alt="Imagen do Livro"
         />
         <div>
           <div>
-            <Title size="md">Entendendo Algoritmos</Title>
-            <SmallText>J.R.R. Tolkien</SmallText>
+            <Title size="md">{data.book.name}</Title>
+            <SmallText>{data.book.author}</SmallText>
           </div>
-          <DescriptionBook>
-            Semper et sapien proin vitae nisi. Feugiat neque integer donec et
-            aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo
-            a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed
-            vulputate massa velit nibh Lorem ipsum dolor sit amet, officia
-            excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi
-            Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat
-            excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
-            aliquip amet voluptate voluptate dolor minim nulla est proident.
-            Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla
-            sunt ex occaecat reprehenderit commodo officia dolor Lorem duis
-            laboris cupidatat officia voluptate. Culpa proident adipisicing id
-            nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua
-            reprehenderit commodo ex non excepteur duis sunt velit enim.
-            Voluptate laboris sint cupidatat ullamco ut ea consectetur et est
-            culpa et culpa duis.
-          </DescriptionBook>
+          <DescriptionBook>{data.book.summary}</DescriptionBook>
         </div>
       </ContentCard>
     </Box>

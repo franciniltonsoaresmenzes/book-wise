@@ -8,7 +8,7 @@ export function RatedBook() {
   return (
     <>
       <HeaderSubTitle>
-        <Text>Sua última leitura</Text>
+        <Text>Livros populares</Text>
         <Link href="/explorar">
           <Text>Ver todas</Text>
           <CaretRight size={16} />

@@ -1,4 +1,6 @@
+import { queryClient } from '@/lib/react-query'
 import { globalStyles } from '@/styles/global'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { NextPage } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import { DefaultSeo } from 'next-seo'
@@ -26,7 +28,7 @@ export default function App({
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <DefaultSeo
         title="Book Wise"
         openGraph={{
@@ -41,6 +43,6 @@ export default function App({
           {getLayout(<Component {...pageProps} />)}
         </SessionProvider>
       </main>
-    </>
+    </QueryClientProvider>
   )
 }
