@@ -9,6 +9,9 @@ import { Binoculars } from '@phosphor-icons/react'
 import { ReactElement, useState } from 'react'
 import { NextPageWithLayout } from '../_app.page'
 import { ContentBook, ContentTags, HeaderTitle, TitlePrincipal } from './styles'
+import { useQuery } from '@tanstack/react-query'
+import { api } from '@/lib/axios'
+import { Book, Category } from '@prisma/client'
 
 type TagsProps = {
   label: string
@@ -45,9 +48,29 @@ const tags: TagsProps[] = [
   },
 ]
 
+type BooksProps = {
+  book: Book
+  category: Category
+}
+
+type ResponseProps = {
+  books: BooksProps[]
+}
+
 const Explorar: NextPageWithLayout = () => {
-  const length = Array.from({ length: 15 })
   const [isSelected, setIsSelected] = useState('Tudo')
+
+  const { data } = useQuery({
+    queryKey: ['books'],
+    queryFn: async () => {
+      const response = await api.get<ResponseProps>('/books')
+
+      return response.data
+    },
+  })
+
+  const books = data ? data.books : []
+
   return (
     <>
       <HeaderTitle>
@@ -70,8 +93,8 @@ const Explorar: NextPageWithLayout = () => {
       </ContentTags>
       <ContentBook>
         <Dialog.Root>
-          {length.map((_, i) => (
-            <BookInfo key={i} />
+          {books.map((book) => (
+            <BookInfo key={book.book.id} data={book} />
           ))}
 
           <SidePanel />
