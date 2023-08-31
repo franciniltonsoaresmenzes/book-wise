@@ -3,8 +3,35 @@ import { Link } from '@/components/UI/Link'
 import { HeaderSubTitle, SectionRatedBooks } from './styles'
 import { BookCardSmall } from '../BookCardSmall'
 import { CaretRight } from '@phosphor-icons/react'
+import { useQuery } from '@tanstack/react-query'
+import { api } from '@/lib/axios'
+
+type BookCardProps = {
+  id: string
+  avgRating: number
+  created_at: string
+  name: string
+  author: string
+  summary: string
+  cover_url: string
+  total_pages: number
+}
+
+type BooksPopular = {
+  books: BookCardProps[]
+}
 
 export function RatedBook() {
+  const { data } = useQuery({
+    queryKey: ['popular'],
+    queryFn: async () => {
+      const response = await api.get<BooksPopular>('/books/popular')
+      return response.data
+    },
+  })
+
+  const books = data?.books ? data.books : []
+
   return (
     <>
       <HeaderSubTitle>
@@ -16,11 +43,9 @@ export function RatedBook() {
       </HeaderSubTitle>
 
       <SectionRatedBooks>
-        <BookCardSmall />
-        <BookCardSmall />
-        <BookCardSmall />
-        <BookCardSmall />
-        <BookCardSmall />
+        {books.map((book) => (
+          <BookCardSmall key={book.id} data={book} />
+        ))}
       </SectionRatedBooks>
     </>
   )

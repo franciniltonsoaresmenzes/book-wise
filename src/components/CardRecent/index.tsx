@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { StartRating } from '../StarRating'
 import { Text, Title } from '../UI/Typography'
 import { Content, Description, Header } from './styles'
+import Link from 'next/link'
+import dayjs from 'dayjs'
 
 type CardRecentProps = {
   id: string
@@ -21,17 +23,21 @@ type Props = {
 }
 
 export function CardRecent({ data }: Props) {
+  const createAt = dayjs(data.created_at).fromNow()
+
   return (
     <Content variant="secundary">
-      <Image
-        src={data.book.cover_url}
-        width={108}
-        height={152}
-        alt="Imagen do Livro"
-      />
+      <Link href={`/explorar?book=${data.book.id}`}>
+        <Image
+          src={data.book.cover_url}
+          width={108}
+          height={152}
+          alt="Imagen do Livro"
+        />
+      </Link>
       <div>
         <Header>
-          <Text as="span">{data.created_at}</Text>
+          <Text as="span">{createAt}</Text>
           <StartRating rating={data.rate} />
         </Header>
         <div>

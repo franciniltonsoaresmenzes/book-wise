@@ -25,6 +25,7 @@ export const globalStyles = globalCss({
 
   a: {
     textDecoration: 'none',
+    color: '$gray100',
   },
   li: {
     listStyle: 'none',

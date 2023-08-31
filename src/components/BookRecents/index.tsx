@@ -6,6 +6,7 @@ import { Text } from '../UI/Typography'
 import { ContentRecent } from './styles'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
+import { useSession } from 'next-auth/react'
 
 type BookCardProps = {
   id: string
@@ -35,11 +36,15 @@ export function BookRecents() {
 
   const rating = data?.rating ? data.rating : []
 
+  const { data: session } = useSession()
+
+  const userId = session ? session.user.id : ''
+
   return (
     <ContentRecent>
       <HeaderSubTitle>
         <Text>Sua última leitura</Text>
-        <Link href="/explorar">
+        <Link href={`/profile/${userId}`}>
           <Text>Ver todas</Text>
           <CaretRight size={16} />
         </Link>

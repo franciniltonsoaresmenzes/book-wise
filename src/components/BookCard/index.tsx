@@ -4,6 +4,8 @@ import { StartRating } from '../StarRating'
 import { Box } from '../UI/Box'
 import { SmallText, Text, Title } from '../UI/Typography'
 import { HeaderCard, ContentCard, DescriptionBook, Author } from './styles'
+import Link from 'next/link'
+import dayjs from 'dayjs'
 
 type BookCardProps = {
   id: string
@@ -17,6 +19,7 @@ type BookCardProps = {
     cover_url: string
   }
   user: {
+    id: string
     name: string
     avatar_url: string
   }
@@ -27,26 +30,31 @@ type Props = {
 }
 
 export function BookCard({ data }: Props) {
+  const createAt = dayjs(data.created_at).fromNow()
   return (
     <Box>
       <HeaderCard>
-        <Author>
-          <Avatar image={data.user.avatar_url} />
-          <div>
-            <Text>{data.user.name}</Text>
-            <SmallText>{data.created_at}</SmallText>
-          </div>
-        </Author>
+        <Link href={`/profile/${data.user.id}`}>
+          <Author>
+            <Avatar image={data.user.avatar_url} />
+            <div>
+              <Text>{data.user.name}</Text>
+              <SmallText>{createAt}</SmallText>
+            </div>
+          </Author>
+        </Link>
         <StartRating rating={data.rate} />
       </HeaderCard>
 
       <ContentCard>
-        <Image
-          src={data.book.cover_url}
-          width={108}
-          height={152}
-          alt="Imagen do Livro"
-        />
+        <Link href={`/explorar?book=${data.book.id}`}>
+          <Image
+            src={data.book.cover_url}
+            width={108}
+            height={152}
+            alt="Imagen do Livro"
+          />
+        </Link>
         <div>
           <div>
             <Title size="md">{data.book.name}</Title>
