@@ -3,7 +3,6 @@ import { Text } from '../UI/Typography'
 import { Content } from './styles'
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: string
   selected?: boolean
 }
 

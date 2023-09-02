@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { Navigations } from './components/Navigations'
 import {
   SideBarContent,
   SideBarHeader,
@@ -18,6 +17,7 @@ import {
 import { Text } from '../UI/Typography'
 import { signOut, useSession } from 'next-auth/react'
 import { Avatar } from '../Avatar'
+import { Navigations } from '../Navigations'
 
 type NavItemsProps = Array<{
   label: string

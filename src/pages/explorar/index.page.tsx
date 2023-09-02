@@ -1,75 +1,73 @@
-import * as Dialog from '@radix-ui/react-dialog'
 import { BookInfo } from '@/components/BookInfo'
 import { InputSearch } from '@/components/InputSearch'
-import { SidePanel } from '@/components/SidePanel'
 import { Tags } from '@/components/Tags'
 import { Title } from '@/components/UI/Typography'
 import { DefaultLayout } from '@/layout/DefaultLayout'
-import { Binoculars } from '@phosphor-icons/react'
+import { api } from '@/lib/axios'
+import { Binoculars, MagnifyingGlass } from '@phosphor-icons/react'
+import { Category } from '@prisma/client'
+import { useQuery } from '@tanstack/react-query'
 import { ReactElement, useState } from 'react'
 import { NextPageWithLayout } from '../_app.page'
 import { ContentBook, ContentTags, HeaderTitle, TitlePrincipal } from './styles'
-import { useQuery } from '@tanstack/react-query'
-import { api } from '@/lib/axios'
-import { Book, Category } from '@prisma/client'
-
-type TagsProps = {
-  label: string
-  selected: boolean
-}
-const tags: TagsProps[] = [
-  {
-    label: 'Tudo',
-    selected: true,
-  },
-  {
-    label: 'Computação',
-    selected: false,
-  },
-  {
-    label: 'Educação',
-    selected: false,
-  },
-  {
-    label: 'Fantasia',
-    selected: false,
-  },
-  {
-    label: 'Ficção científica',
-    selected: false,
-  },
-  {
-    label: 'Horror',
-    selected: false,
-  },
-  {
-    label: 'Suspense',
-    selected: false,
-  },
-]
 
 type BooksProps = {
-  book: Book
-  category: Category
+  id: string
+  name: string
+  author: string
+  summary: string
+  cover_url: string
+  total_pages: number
+  created_at: string
+  avgRating: number
+  rating: number
+  alReady: boolean
 }
 
 type ResponseProps = {
   books: BooksProps[]
 }
 
+type CategoryProps = {
+  category: Category[]
+}
+
 const Explorar: NextPageWithLayout = () => {
-  const [isSelected, setIsSelected] = useState('Tudo')
+  const [isSelected, setIsSelected] = useState<string | null>(null)
+  const [isValueFilter, setIsValueFilter] = useState<string>('')
 
   const { data } = useQuery({
-    queryKey: ['books'],
+    queryKey: ['books', isSelected],
     queryFn: async () => {
-      const response = await api.get<ResponseProps>('/books')
+      const response = await api.get<ResponseProps>('/books', {
+        params: {
+          category: isSelected,
+        },
+      })
+
+      return response.data
+    },
+  })
+
+  const { data: tags } = useQuery({
+    queryKey: ['categorys'],
+    queryFn: async () => {
+      const response = await api.get<CategoryProps>('/category')
 
       return response.data
     },
   })
 
   const books = data ? data.books : []
+
+  const categorys = tags ? tags.category : []
+
+  const filterBooks = books.filter((book) => {
+    return (
+      book.name.toLowerCase().includes(isValueFilter.toLowerCase()) ||
+      book.author.toLowerCase().includes(isValueFilter.toLowerCase())
+    )
+  })
 
   return (
     <>
@@ -78,27 +76,35 @@ const Explorar: NextPageWithLayout = () => {
           <Binoculars size={32} />
           <Title>Explorar</Title>
         </TitlePrincipal>
-        <InputSearch />
+        <InputSearch
+          icon={<MagnifyingGlass size={20} />}
+          placeholder="Buscar livro ou autor"
+          type="text"
+          value={isValueFilter}
+          onChange={(e) => setIsValueFilter(e.target.value)}
+        />
       </HeaderTitle>
       <ContentTags>
-        {tags.map((tag) => (
+        <Tags
+          selected={isSelected === null}
+          onClick={() => setIsSelected(null)}
+        >
+          Tudo
+        </Tags>
+        {categorys.map((tag) => (
           <Tags
-            key={tag.label}
-            selected={isSelected === tag.label}
-            onClick={() => setIsSelected(tag.label)}
+            key={tag.id}
+            selected={isSelected === tag.id}
+            onClick={() => setIsSelected(tag.id)}
           >
-            {tag.label}
+            {tag.name}
           </Tags>
         ))}
       </ContentTags>
       <ContentBook>
-        <Dialog.Root>
-          {books.map((book) => (
-            <BookInfo key={book.book.id} data={book} />
-          ))}
-
-          <SidePanel />
-        </Dialog.Root>
+        {filterBooks.map((book) => (
+          <BookInfo key={book.id} data={book} />
+        ))}
       </ContentBook>
     </>
   )

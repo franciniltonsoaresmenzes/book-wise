@@ -3,6 +3,8 @@ import { styled } from '../../../stitches.config'
 export const ContentTags = styled('div', {
   display: 'flex',
   gap: '$3',
+  overflowX: 'scroll',
+  padding: '1rem 0 1rem 0',
 })
 
 export const TitlePrincipal = styled('div', {
@@ -24,6 +26,6 @@ export const HeaderTitle = styled('div', {
 export const ContentBook = styled('section', {
   marginTop: '3rem',
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(279px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(279px, .5fr))',
   gap: '1.25rem',
 })

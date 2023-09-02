@@ -1,11 +1,15 @@
-import { MagnifyingGlass } from '@phosphor-icons/react'
-import { ContentInput, Input } from './styles'
+import { InputHTMLAttributes, ReactNode } from 'react'
+import { ContentInput } from './styles'
 
-export function InputSearch() {
+type Props = InputHTMLAttributes<HTMLInputElement> & {
+  icon?: ReactNode
+}
+
+export const InputSearch = ({ icon, ...props }: Props) => {
   return (
     <ContentInput>
-      <Input placeholder="Buscar livro ou autor" />
-      <MagnifyingGlass size={20} />
+      <input {...props} />
+      {icon}
     </ContentInput>
   )
 }

@@ -13,16 +13,16 @@ export const ContentInput = styled('div', {
   '&:focus-within': {
     border: '1px solid $colors$green200',
   },
-})
 
-export const Input = styled('input', {
-  outline: 'none',
-  background: 'none',
-  color: '$gray400',
-  border: 'none',
-  fontSize: '0.875rem',
-  fontWeight: '$regular',
-  '&:focus': {
-    color: '$gray200',
+  ' > input': {
+    outline: 'none',
+    background: 'none',
+    color: '$gray400',
+    border: 'none',
+    fontSize: '0.875rem',
+    fontWeight: '$regular',
+    '&:focus': {
+      color: '$gray200',
+    },
   },
 })

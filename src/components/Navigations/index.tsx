@@ -1,7 +1,7 @@
-import { Navigation } from '@/components/Navigation'
 import { Text } from '@/components/UI/Typography'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
+import { LinkNavigation } from '../LinkNavigation'
 
 type DataProps = Array<{
   label: string
@@ -19,14 +19,14 @@ export function Navigations({ data }: Props) {
   return (
     <nav>
       {data.map((menu) => (
-        <Navigation
+        <LinkNavigation
           key={menu.label}
           href={menu.href}
           active={pathname === menu.href}
         >
           {menu.icon}
           <Text>{menu.label}</Text>
-        </Navigation>
+        </LinkNavigation>
       ))}
     </nav>
   )

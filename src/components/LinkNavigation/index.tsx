@@ -8,7 +8,7 @@ type Props = {
   active?: boolean
 }
 
-export function Navigation({ children, href, active = false }: Props) {
+export function LinkNavigation({ children, href, active = false }: Props) {
   return (
     <Link href={href}>
       <Content active={active}>{children}</Content>
