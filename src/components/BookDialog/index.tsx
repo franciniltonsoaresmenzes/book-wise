@@ -8,16 +8,57 @@ import { Text } from '../UI/Typography'
 import { Comments } from '../Comments'
 import { useSession } from 'next-auth/react'
 import { Link } from '../UI/Link'
+import { useQuery } from '@tanstack/react-query'
+import { api } from '@/lib/axios'
+import { Category, Rating, User } from '@prisma/client'
 
 type Props = {
   children: ReactNode
   bookId: string
 }
+
+type CategoryProps = {
+  category: Category
+}
+
+export type RatingProps = Rating & {
+  user: User
+}
+
+export type BookProps = {
+  id: string
+  name: string
+  author: string
+  summary: string
+  cover_url: string
+  total_pages: number
+  created_at: string
+  categories: CategoryProps[]
+  ratings: RatingProps[]
+  avgRating: number
+}
+
+type ResposneProps = {
+  book: BookProps
+}
+
 export function BookDialog({ children, bookId }: Props) {
   const [openSideBar, SetOpenSideBar] = useState<boolean>(false)
 
-  const { data } = useSession()
-  const user = data?.user
+  const { data, isFetching } = useQuery({
+    queryKey: ['book', bookId],
+    queryFn: async () => {
+      const response = await api.get<ResposneProps>(`/books/${bookId}`)
+      return response.data ?? {}
+    },
+    enabled: openSideBar,
+  })
+
+  const book = data?.book as BookProps
+  const comments = data?.book.ratings ? data.book.ratings : []
+
+  const { data: session } = useSession()
+  const user = session?.user
 
   const router = useRouter()
   const paramsbookId = router.query.book
@@ -47,7 +88,8 @@ export function BookDialog({ children, bookId }: Props) {
           <Close>
             <X size={24} />
           </Close>
-          <BookDetail />
+          {!isFetching && <BookDetail data={book} />}
+          {isFetching && 'Carregando...'}
 
           <EvaluationHeader>
             <Text size="sm">Avaliações</Text>
@@ -59,9 +101,10 @@ export function BookDialog({ children, bookId }: Props) {
           </EvaluationHeader>
 
           <Section>
-            <Comments />
-            <Comments />
-            <Comments />
+            {!isFetching &&
+              comments.map((comment) => (
+                <Comments key={comment.id} data={comment} />
+              ))}
           </Section>
         </Content>
         <Overlay />

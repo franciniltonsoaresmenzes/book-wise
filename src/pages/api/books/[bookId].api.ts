@@ -1,7 +1,5 @@
 import { prisma } from '@/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getServerSession } from 'next-auth'
-import { bulildNextAuthOptions } from '../auth/[...nextauth].api'
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,7 +8,7 @@ export default async function handler(
   if (req.method !== 'GET') return res.status(405).end()
   const bookId = req.query.bookId as string
 
-  const bookPrisma = await prisma.book.findMany({
+  const bookPrisma = await prisma.book.findUnique({
     where: {
       id: bookId,
     },

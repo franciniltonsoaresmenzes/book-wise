@@ -12,28 +12,31 @@ import {
   HeaderTitlte,
   Rating,
 } from './styles'
+import { BookProps } from '../BookDialog'
 
-export function BookDetail() {
+type Props = {
+  data: BookProps
+}
+
+export function BookDetail({ data }: Props) {
   return (
     <Card>
       <Content>
         <Header>
           <Image
-            src="/images/books/entendendo-algoritmos.png"
+            src={data.cover_url}
             width={172}
             height={242}
             alt="Imagen do Livro"
           />
           <Description>
             <div>
-              <HeaderTitlte size="lg">
-                14 Hábitos de Desenvolvedores Altamente Produtivos
-              </HeaderTitlte>
-              <SmallText size="md">Aditya Bhargava</SmallText>
+              <HeaderTitlte size="lg">{data.name}</HeaderTitlte>
+              <SmallText size="md">{data.author}</SmallText>
             </div>
             <div>
-              <StartRating rating={4} />
-              <Rating size="sm">3 avaliações</Rating>
+              <StartRating rating={Math.floor(data.avgRating)} />
+              <Rating size="sm">{Math.floor(data.avgRating)} avaliações</Rating>
             </div>
           </Description>
         </Header>
@@ -42,7 +45,11 @@ export function BookDetail() {
             <BookmarkSimple size={24} />
             <div>
               <SmallText size="sm">Categoria</SmallText>
-              <Title size="md">Computação, educação</Title>
+              <Title size="md">
+                {data.categories.map(
+                  (category) => `${category.category.name} `,
+                )}
+              </Title>
             </div>
           </Category>
 
@@ -50,7 +57,7 @@ export function BookDetail() {
             <BookOpen size={24} />
             <div>
               <SmallText>Páginas</SmallText>
-              <Title size="md">160</Title>
+              <Title size="md">{data.total_pages}</Title>
             </div>
           </Category>
         </Footer>

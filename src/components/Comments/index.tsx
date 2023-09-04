@@ -1,26 +1,32 @@
+import dayjs from 'dayjs'
 import { Avatar } from '../Avatar'
+import { RatingProps } from '../BookDialog'
 import { StartRating } from '../StarRating'
 import { Box } from '../UI/Box'
 import { SmallText, Text } from '../UI/Typography'
 import { Author, Description, Header } from './styles'
 
-export function Comments() {
+type Props = {
+  data: RatingProps
+}
+
+export function Comments({ data }: Props) {
+  const createAt = dayjs(data.created_at).fromNow()
+
   return (
     <Box>
       <Header>
         <Author>
-          <Avatar image="null" />
+          <Avatar image={data.user.avatar_url ?? ''} />
           <div>
-            <Text>Jaxson Dias</Text>
-            <SmallText>Hoje</SmallText>
+            <Text>{data.user.name}</Text>
+            <SmallText>{createAt}</SmallText>
           </div>
         </Author>
-        <StartRating rating={3} />
+        <StartRating rating={data.rate} />
       </Header>
       <Description as="p" size="sm">
-        Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.
-        Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta
-        eget nec vitae sit vulputate eget
+        {data.description}
       </Description>
     </Box>
   )

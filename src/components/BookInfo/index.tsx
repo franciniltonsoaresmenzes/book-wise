@@ -1,10 +1,8 @@
-import * as Dialog from '@radix-ui/react-dialog'
 import Image from 'next/image'
+import { BookDialog } from '../BookDialog'
 import { StartRating } from '../StarRating'
 import { SmallText, Title } from '../UI/Typography'
 import { Content, Description } from './styles'
-import { BookDialog } from '../BookDialog'
-import Link from 'next/link'
 
 type BookInfoProps = {
   id: string
