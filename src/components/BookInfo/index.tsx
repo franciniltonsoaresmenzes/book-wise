@@ -39,7 +39,7 @@ export function BookInfo({ data }: Props) {
             <SmallText>{data.author}</SmallText>
             {isReady && <Title>Lido</Title>}
           </div>
-          <StartRating rating={data.rating} />
+          <StartRating rating={data.avgRating} />
         </Description>
       </Content>
     </BookDialog>

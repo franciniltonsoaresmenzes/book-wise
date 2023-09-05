@@ -11,6 +11,8 @@ import { Link } from '../UI/Link'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
 import { Category, Rating, User } from '@prisma/client'
+import { TextArea } from '../TextArea'
+import { Evaluate } from '../Evaluate'
 
 type Props = {
   children: ReactNode
@@ -101,6 +103,7 @@ export function BookDialog({ children, bookId }: Props) {
           </EvaluationHeader>
 
           <Section>
+            <Evaluate />
             {!isFetching &&
               comments.map((comment) => (
                 <Comments key={comment.id} data={comment} />

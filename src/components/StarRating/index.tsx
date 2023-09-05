@@ -6,11 +6,13 @@ type Props = {
 }
 
 export function StartRating({ rating }: Props) {
-  if (rating > 5 && rating < 0) {
+  const value = Math.floor(rating)
+
+  if (value > 5 && value < 0) {
     return <p>Invalido</p>
   }
-  const numer = Array.from({ length: rating })
-  const re = Array.from({ length: 5 - rating })
+  const numer = Array.from({ length: value })
+  const re = Array.from({ length: 5 - value })
 
   return (
     <Content>
