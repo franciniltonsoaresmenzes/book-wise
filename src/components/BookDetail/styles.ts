@@ -40,12 +40,18 @@ export const Footer = styled('div', {
   borderTop: '1px solid $colors$gray600',
 })
 
-export const Category = styled('div', {
+export const CategoryContent = styled('div', {
   display: 'flex',
   gap: '$4',
   alignItems: 'center',
 
   '> svg': {
     color: '$green100',
+  },
+})
+
+export const Category = styled('div', {
+  'span:not(:last-child)::after': {
+    content: ', ',
   },
 })

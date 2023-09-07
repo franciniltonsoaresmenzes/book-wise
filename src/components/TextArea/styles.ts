@@ -17,6 +17,8 @@ export const Input = styled('textarea', {
   fontSize: '$sm',
   fontWeight: '$regular',
 
+  border: '1px solid $colors$gray500',
+
   resize: 'none',
 
   '&:focus': {

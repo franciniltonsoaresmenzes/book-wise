@@ -8,9 +8,10 @@ import {
   Header,
   Description,
   Content,
-  Category,
+  CategoryContent,
   HeaderTitlte,
   Rating,
+  Category,
 } from './styles'
 import { BookProps } from '../BookDialog'
 
@@ -41,25 +42,27 @@ export function BookDetail({ data }: Props) {
           </Description>
         </Header>
         <Footer>
-          <Category>
+          <CategoryContent>
             <BookmarkSimple size={24} />
             <div>
               <SmallText size="sm">Categoria</SmallText>
-              <Title size="md">
-                {data.categories.map(
-                  (category) => `${category.category.name} `,
-                )}
-              </Title>
+              <Category>
+                {data.categories.map(({ category }) => (
+                  <Title key={category.id} size="md" as="span">
+                    {category.name}
+                  </Title>
+                ))}
+              </Category>
             </div>
-          </Category>
+          </CategoryContent>
 
-          <Category>
+          <CategoryContent>
             <BookOpen size={24} />
             <div>
               <SmallText>Páginas</SmallText>
               <Title size="md">{data.total_pages}</Title>
             </div>
-          </Category>
+          </CategoryContent>
         </Footer>
       </Content>
     </Card>

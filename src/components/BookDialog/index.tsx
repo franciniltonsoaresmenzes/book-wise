@@ -1,18 +1,17 @@
-import * as Dialog from '@radix-ui/react-dialog'
-import { ReactNode, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { X } from '@phosphor-icons/react'
-import { Close, Content, EvaluationHeader, Overlay, Section } from './styles'
-import { BookDetail } from '../BookDetail'
-import { Text } from '../UI/Typography'
-import { Comments } from '../Comments'
-import { useSession } from 'next-auth/react'
-import { Link } from '../UI/Link'
-import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
+import { X } from '@phosphor-icons/react'
 import { Category, Rating, User } from '@prisma/client'
-import { TextArea } from '../TextArea'
+import * as Dialog from '@radix-ui/react-dialog'
+import { useQuery } from '@tanstack/react-query'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { ReactNode, useEffect, useState } from 'react'
+import { BookDetail } from '../BookDetail'
+import { Comments } from '../Comments'
 import { Evaluate } from '../Evaluate'
+import { Link } from '../UI/Link'
+import { Text } from '../UI/Typography'
+import { Close, Content, EvaluationHeader, Overlay, Section } from './styles'
 
 type Props = {
   children: ReactNode
@@ -46,6 +45,7 @@ type ResposneProps = {
 
 export function BookDialog({ children, bookId }: Props) {
   const [openSideBar, SetOpenSideBar] = useState<boolean>(false)
+  const [openEvaluate, setOpenEvaluate] = useState<boolean>(false)
 
   const { data, isFetching } = useQuery({
     queryKey: ['book', bookId],
@@ -81,6 +81,10 @@ export function BookDialog({ children, bookId }: Props) {
     SetOpenSideBar(open)
   }
 
+  const isCommented = data?.book.ratings.find(
+    (comment) => comment.user_id === user?.id,
+  )
+
   return (
     <Dialog.Root open={openSideBar} onOpenChange={onOpenChange}>
       <Dialog.Trigger asChild>{children}</Dialog.Trigger>
@@ -95,15 +99,21 @@ export function BookDialog({ children, bookId }: Props) {
 
           <EvaluationHeader>
             <Text size="sm">Avaliações</Text>
-            {!user && (
-              <Link as="button">
+            {!isCommented && (
+              <Link as="button" onClick={() => setOpenEvaluate(true)}>
                 <Text as="span">Avaliar</Text>
               </Link>
             )}
           </EvaluationHeader>
 
           <Section>
-            <Evaluate />
+            {openEvaluate && (
+              <Evaluate
+                onClose={() => setOpenEvaluate(false)}
+                bookId={bookId}
+              />
+            )}
+
             {!isFetching &&
               comments.map((comment) => (
                 <Comments key={comment.id} data={comment} />

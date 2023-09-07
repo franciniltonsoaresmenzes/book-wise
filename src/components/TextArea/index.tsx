@@ -10,7 +10,7 @@ export function TextArea({ value, limit, ...props }: Props) {
   const characters = String(value).length
   return (
     <Container>
-      <Input placeholder="Escreva sua avaliação" {...props} />
+      <Input placeholder="Escreva sua avaliação" {...props} maxLength={limit} />
       <Accountant>
         {characters}/{limit}
       </Accountant>

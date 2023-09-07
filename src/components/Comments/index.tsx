@@ -5,6 +5,7 @@ import { StartRating } from '../StarRating'
 import { Box } from '../UI/Box'
 import { SmallText, Text } from '../UI/Typography'
 import { Author, Description, Header } from './styles'
+import Link from 'next/link'
 
 type Props = {
   data: RatingProps
@@ -17,7 +18,9 @@ export function Comments({ data }: Props) {
     <Box>
       <Header>
         <Author>
-          <Avatar image={data.user.avatar_url ?? ''} />
+          <Link href={`/perfil/${data.user.id}`}>
+            <Avatar image={data.user.avatar_url ?? ''} />
+          </Link>
           <div>
             <Text>{data.user.name}</Text>
             <SmallText>{createAt}</SmallText>

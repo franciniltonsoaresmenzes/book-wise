@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import { BookDialog } from '../BookDialog'
 import { StartRating } from '../StarRating'
-import { SmallText, Title } from '../UI/Typography'
-import { Content, Description } from './styles'
+import { SmallText, Text, Title } from '../UI/Typography'
+import { Content, Description, IsReady } from './styles'
 
 type BookInfoProps = {
   id: string
@@ -27,6 +27,13 @@ export function BookInfo({ data }: Props) {
   return (
     <BookDialog bookId={data.id}>
       <Content variant="small">
+        {isReady && (
+          <IsReady>
+            <Text as="span" size="xs" weight="bold">
+              Lido
+            </Text>
+          </IsReady>
+        )}
         <Image
           src={data.cover_url}
           width={108}
@@ -37,7 +44,6 @@ export function BookInfo({ data }: Props) {
           <div>
             <Title size="md">{data.name}</Title>
             <SmallText>{data.author}</SmallText>
-            {isReady && <Title>Lido</Title>}
           </div>
           <StartRating rating={data.avgRating} />
         </Description>

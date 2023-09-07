@@ -5,13 +5,10 @@ export const Button = styled('button', {
   padding: '0 $6',
 
   width: '100%',
-  height: 72,
 
   display: 'flex',
   gap: '$5',
   alignItems: 'center',
-
-  borderRadius: 8,
 
   '> img': {
     alignSelf: 'center',
@@ -21,5 +18,29 @@ export const Button = styled('button', {
 
   '&:hover': {
     backgroundColor: '$gray500',
+  },
+
+  cursor: 'pointer',
+
+  '&:disabled': {
+    cursor: 'not-allowed',
+    backgroundColor: '$gray400',
+    opacity: 0.6,
+  },
+  variants: {
+    weight: {
+      medium: {
+        padding: '0 $6',
+        borderRadius: 8,
+        height: 72,
+      },
+      small: {
+        padding: '$2',
+        borderRadius: 4,
+      },
+    },
+  },
+  defaultVariants: {
+    weight: 'medium',
   },
 })
