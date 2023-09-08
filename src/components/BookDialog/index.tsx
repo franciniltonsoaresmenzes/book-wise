@@ -12,6 +12,7 @@ import { Evaluate } from '../Evaluate'
 import { Link } from '../UI/Link'
 import { Text } from '../UI/Typography'
 import { Close, Content, EvaluationHeader, Overlay, Section } from './styles'
+import { AuthComment } from '../AuthComment'
 
 type Props = {
   children: ReactNode
@@ -99,10 +100,21 @@ export function BookDialog({ children, bookId }: Props) {
 
           <EvaluationHeader>
             <Text size="sm">Avaliações</Text>
-            {!isCommented && (
+            {user && !isCommented && (
               <Link as="button" onClick={() => setOpenEvaluate(true)}>
                 <Text as="span">Avaliar</Text>
               </Link>
+            )}
+
+            {!user && (
+              <Dialog.Root>
+                <Dialog.Trigger asChild>
+                  <Link as="button">
+                    <Text as="span">Avaliar</Text>
+                  </Link>
+                </Dialog.Trigger>
+                <AuthComment />
+              </Dialog.Root>
             )}
           </EvaluationHeader>
 

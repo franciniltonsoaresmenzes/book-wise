@@ -14,7 +14,7 @@ export default function Login() {
             <Title>Boas vindas!</Title>
             <Text as="span">Faça seu login ou acesse como visitante.</Text>
           </div>
-          <ButtonsAuth />
+          <ButtonsAuth isVisitant />
         </FormLogin>
       </ContentLogin>
     </Container>

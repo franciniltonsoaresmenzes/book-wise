@@ -5,7 +5,11 @@ import { Title } from '../UI/Typography'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
-export function ButtonsAuth() {
+type Props = {
+  isVisitant?: boolean
+}
+
+export function ButtonsAuth({ isVisitant = false }: Props) {
   const router = useRouter()
   async function hanndleConnectAuth(provides?: string) {
     if (!provides) {
@@ -42,17 +46,19 @@ export function ButtonsAuth() {
         </Title>
       </Button>
 
-      <Button onClick={() => hanndleConnectAuth()}>
-        <Image
-          src="/icon/RocketLaunch.svg"
-          width={32}
-          height={32}
-          alt="Icone Rocket"
-        />
-        <Title as="span" size="lg">
-          Acessar como visitante
-        </Title>
-      </Button>
+      {isVisitant && (
+        <Button onClick={() => hanndleConnectAuth()}>
+          <Image
+            src="/icon/RocketLaunch.svg"
+            width={32}
+            height={32}
+            alt="Icone Rocket"
+          />
+          <Title as="span" size="lg">
+            Acessar como visitante
+          </Title>
+        </Button>
+      )}
     </Content>
   )
 }
