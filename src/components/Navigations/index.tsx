@@ -14,7 +14,7 @@ type Props = {
 }
 
 export function Navigations({ data }: Props) {
-  const { pathname } = useRouter()
+  const { asPath } = useRouter()
 
   return (
     <nav>
@@ -22,7 +22,7 @@ export function Navigations({ data }: Props) {
         <LinkNavigation
           key={menu.label}
           href={menu.href}
-          active={pathname === menu.href}
+          active={asPath === menu.href}
         >
           {menu.icon}
           <Text>{menu.label}</Text>

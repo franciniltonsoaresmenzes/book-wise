@@ -18,7 +18,7 @@ export function Comments({ data }: Props) {
     <Box>
       <Header>
         <Author>
-          <Link href={`/perfil/${data.user.id}`}>
+          <Link href={`/profile/${data.user.id}`}>
             <Avatar image={data.user.avatar_url ?? ''} />
           </Link>
           <div>

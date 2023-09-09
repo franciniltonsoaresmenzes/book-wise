@@ -5,6 +5,7 @@ import { BookCardSmall } from '../BookCardSmall'
 import { CaretRight } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
+import Skeleton from 'react-loading-skeleton'
 
 type BookCardProps = {
   id: string
@@ -22,7 +23,7 @@ type BooksPopular = {
 }
 
 export function RatedBook() {
-  const { data } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ['popular'],
     queryFn: async () => {
       const response = await api.get<BooksPopular>('/books/popular')
@@ -43,9 +44,9 @@ export function RatedBook() {
       </HeaderSubTitle>
 
       <SectionRatedBooks>
-        {books.map((book) => (
-          <BookCardSmall key={book.id} data={book} />
-        ))}
+        {isFetching && <Skeleton count={3} height={150} />}
+        {!isFetching &&
+          books.map((book) => <BookCardSmall key={book.id} data={book} />)}
       </SectionRatedBooks>
     </>
   )

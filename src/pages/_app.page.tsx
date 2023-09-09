@@ -1,3 +1,5 @@
+import 'react-loading-skeleton/dist/skeleton.css'
+import { SkeletonTheme } from 'react-loading-skeleton'
 import '../lib/dayjs'
 import { queryClient } from '@/lib/react-query'
 import { globalStyles } from '@/styles/global'
@@ -40,9 +42,11 @@ export default function App({
         }}
       />
       <main className={nunito.className}>
-        <SessionProvider session={session}>
-          {getLayout(<Component {...pageProps} />)}
-        </SessionProvider>
+        <SkeletonTheme baseColor="#202020" highlightColor="#444">
+          <SessionProvider session={session}>
+            {getLayout(<Component {...pageProps} />)}
+          </SessionProvider>
+        </SkeletonTheme>
       </main>
     </QueryClientProvider>
   )

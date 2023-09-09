@@ -3,6 +3,7 @@ import { BookCard } from '../BookCard'
 import { Text } from '../UI/Typography'
 import { ContentBook } from './styles'
 import { api } from '@/lib/axios'
+import Skeleton from 'react-loading-skeleton'
 
 type BookCardProps = {
   id: string
@@ -44,7 +45,7 @@ export function BooksReviews() {
         <Text>Avaliações mais recentes</Text>
       </div>
       <ContentBook>
-        {isFetching && 'Carregando'}
+        {isFetching && <Skeleton count={3} height={150} />}
         {!isFetching &&
           rating.map((book) => <BookCard key={book.id} data={book} />)}
       </ContentBook>

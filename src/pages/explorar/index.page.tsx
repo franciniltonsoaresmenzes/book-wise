@@ -36,7 +36,7 @@ const Explorar: NextPageWithLayout = () => {
   const [isSelected, setIsSelected] = useState<string | null>(null)
   const [isValueFilter, setIsValueFilter] = useState<string>('')
 
-  const { data } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ['books', isSelected],
     queryFn: async () => {
       const response = await api.get<ResponseProps>('/books', {
@@ -102,9 +102,8 @@ const Explorar: NextPageWithLayout = () => {
         ))}
       </ContentTags>
       <ContentBook>
-        {filterBooks.map((book) => (
-          <BookInfo key={book.id} data={book} />
-        ))}
+        {!isFetching &&
+          filterBooks.map((book) => <BookInfo key={book.id} data={book} />)}
       </ContentBook>
     </>
   )

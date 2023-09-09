@@ -45,7 +45,7 @@ export function SideBar() {
   if (user) {
     navItems.push({
       label: 'Profile',
-      href: '/profile',
+      href: `/profile/${user.id}`,
       icon: <User size={24} />,
     })
   }

@@ -7,6 +7,7 @@ import { ContentRecent } from './styles'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
 import { useSession } from 'next-auth/react'
+import Skeleton from 'react-loading-skeleton'
 
 type BookCardProps = {
   id: string
@@ -26,7 +27,7 @@ type Rating = {
 }
 
 export function BookRecents() {
-  const { data } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ['rating/lastest-user'],
     queryFn: async () => {
       const resposne = await api.get<Rating>('/rating/user-latest')
@@ -49,9 +50,9 @@ export function BookRecents() {
           <CaretRight size={16} />
         </Link>
       </HeaderSubTitle>
-      {rating.map((book) => (
-        <CardRecent key={book.id} data={book} />
-      ))}
+      {isFetching && <Skeleton count={3} height={150} />}
+      {!isFetching &&
+        rating.map((book) => <CardRecent key={book.id} data={book} />)}
     </ContentRecent>
   )
 }
