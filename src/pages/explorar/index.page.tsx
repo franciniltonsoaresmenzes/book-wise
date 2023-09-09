@@ -77,6 +77,7 @@ const Explorar: NextPageWithLayout = () => {
           <Title>Explorar</Title>
         </TitlePrincipal>
         <InputSearch
+          css={{ maxWidth: 393 }}
           icon={<MagnifyingGlass size={20} />}
           placeholder="Buscar livro ou autor"
           type="text"

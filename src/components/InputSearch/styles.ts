@@ -9,7 +9,6 @@ export const ContentInput = styled('div', {
   gap: '0.5rem',
   color: '$gray500',
   width: '100%',
-  maxWidth: 393,
   '&:focus-within': {
     border: '1px solid $colors$green200',
   },
