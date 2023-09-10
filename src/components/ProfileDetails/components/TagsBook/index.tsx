@@ -1,15 +1,21 @@
 import { Text, Title } from '@/components/UI/Typography'
-import { BookOpen } from '@phosphor-icons/react'
+import { ReactNode } from 'react'
+import { Content } from './styles'
 
-export function TagsBook() {
+type Props = {
+  icon: ReactNode
+  category: string
+  value: string | number
+}
+
+export function TagsBook({ icon, category, value }: Props) {
   return (
-    <div>
-      <BookOpen size={32} />
-
+    <Content>
+      {icon}
       <div>
-        <Title>853</Title>
-        <Text>Páginas lidas</Text>
+        <Title size="md">{value}</Title>
+        <Text size="sm">{category}</Text>
       </div>
-    </div>
+    </Content>
   )
 }

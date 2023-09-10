@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { styled } from '../../../stitches.config'
 
 export const LayoutMain = styled('main', {
@@ -19,4 +20,10 @@ export const FlexCardBook = styled('div', {
 
 export const DetailsProfiler = styled('div', {
   width: '100%',
+})
+
+export const LinkBack = styled(Link, {
+  display: 'flex',
+  gap: 7,
+  alignItems: 'center',
 })
