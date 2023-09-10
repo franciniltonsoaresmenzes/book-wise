@@ -1,14 +1,15 @@
 import Image from 'next/image'
-import { Box } from '../UI/Box'
-import { SmallText, Text } from '../UI/Typography'
 import { StartRating } from '../StarRating'
+import { Box } from '../UI/Box'
+import { SmallText, Title } from '../UI/Typography'
+import { Data, Header } from './styles'
 
 export function BookCardProfile() {
   return (
     <div>
-      <span>Há 2 dias</span>
+      <Data size="sm">Há 2 dias</Data>
       <Box>
-        <div>
+        <Header>
           <Image
             src="/images/books/14-habitos-de-desenvolvedores-altamente-produtivos.png"
             width={108}
@@ -17,13 +18,13 @@ export function BookCardProfile() {
           />
           <div>
             <div>
-              <Text>Entendendo Algoritmos</Text>
+              <Title>Entendendo Algoritmos</Title>
               <SmallText>Aditya Bhargava</SmallText>
             </div>
 
             <StartRating rating={4} />
           </div>
-        </div>
+        </Header>
         <p>
           Tristique massa sed enim lacinia odio. Congue ut faucibus nunc vitae
           non. Nam feugiat vel morbi viverra vitae mi. Vitae fringilla ut et

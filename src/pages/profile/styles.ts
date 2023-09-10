@@ -18,6 +18,5 @@ export const FlexCardBook = styled('div', {
 })
 
 export const DetailsProfiler = styled('div', {
-  background: 'yellow',
   width: '100%',
 })
