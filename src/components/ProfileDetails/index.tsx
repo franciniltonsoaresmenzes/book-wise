@@ -7,16 +7,30 @@ import {
 import { Avatar } from '../Avatar'
 import { SmallText, Title } from '../UI/Typography'
 import { TagsBook } from './components/TagsBook'
-import { Header, Content, Rectangle, ContentTag } from './styles'
+import { Content, ContentTag, Header, Rectangle } from './styles'
+import { User } from '@prisma/client'
+import dayjs from 'dayjs'
 
-export function Perfil() {
+type ProfileProps = {
+  metrics: {
+    countPagesRead: number
+    ratingsLenght: number
+    countAuthor: number
+    bestCategory: string
+    user: User
+  }
+}
+
+export function Perfil({ metrics }: ProfileProps) {
+  const createAt = dayjs(metrics.user.created_at).fromNow()
+
   return (
     <Content>
       <Header>
-        <Avatar image="i" variant="xs" />
+        <Avatar image={metrics.user.avatar_url ?? ''} variant="xs" />
         <div>
-          <Title>Brandon Botosh</Title>
-          <SmallText>membro desde 2019</SmallText>
+          <Title>{metrics.user.name}</Title>
+          <SmallText>{createAt}</SmallText>
         </div>
       </Header>
 
@@ -26,22 +40,22 @@ export function Perfil() {
         <TagsBook
           icon={<BookOpen size={32} />}
           category="Páginas lidas"
-          value={853}
+          value={metrics.countPagesRead}
         />
         <TagsBook
           icon={<Books size={32} />}
           category="Livros avaliados"
-          value={10}
+          value={metrics.ratingsLenght}
         />
         <TagsBook
           icon={<UserList size={32} />}
           category="Autores lidos"
-          value={10}
+          value={metrics.countAuthor}
         />
         <TagsBook
           icon={<BookmarkSimple size={32} />}
           category="Categoria mais lida"
-          value="Computação"
+          value={metrics.bestCategory}
         />
       </ContentTag>
     </Content>

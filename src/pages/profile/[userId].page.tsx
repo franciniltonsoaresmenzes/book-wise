@@ -3,7 +3,11 @@ import { InputSearch } from '@/components/InputSearch'
 import { Perfil } from '@/components/ProfileDetails'
 import { HeaderTitle, Title } from '@/components/UI/Typography'
 import { DefaultLayout } from '@/layout/DefaultLayout'
+import { api } from '@/lib/axios'
 import { CaretLeft, MagnifyingGlass, User } from '@phosphor-icons/react'
+import { useQuery } from '@tanstack/react-query'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import { ReactElement } from 'react'
 import { NextPageWithLayout } from '../_app.page'
 import {
@@ -13,18 +17,53 @@ import {
   LinkBack,
   Section,
 } from './styles'
-import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
+import {
+  Book,
+  CategoriesOnBooks,
+  Category,
+  Rating,
+  User as PrismaUser,
+} from '@prisma/client'
+
+export type ProfileRating = Rating & {
+  book: Book & {
+    categories: CategoriesOnBooks &
+      {
+        category: Category
+      }[]
+  }
+}
+
+type Response = {
+  books: ProfileRating[]
+  metrics: {
+    countPagesRead: number
+    ratingsLenght: number
+    countAuthor: number
+    bestCategory: string
+    user: PrismaUser
+  }
+}
 
 const Profile: NextPageWithLayout = () => {
   const router = useRouter()
-  const userIdPathname = router.asPath.split('/')[2]
+  const userIdPathname = router.query.userId as string
 
   const { data: session } = useSession()
 
   const userId = session?.user ? session.user.id : ''
-
   const isWhoami = userId === userIdPathname
+
+  const { data: profile, isFetching } = useQuery<Response>({
+    queryKey: ['user', userIdPathname],
+    queryFn: async () => {
+      const response = await api.get(`/profile/${userIdPathname}`)
+      return response?.data ?? {}
+    },
+    enabled: !!userIdPathname,
+  })
+
+  if (!profile) return
 
   return (
     <>
@@ -50,13 +89,14 @@ const Profile: NextPageWithLayout = () => {
             placeholder="Buscar livro avaliado"
           />
           <FlexCardBook>
-            <BookCardProfile />
-            <BookCardProfile />
-            <BookCardProfile />
+            {!isFetching &&
+              profile?.books.map((book) => (
+                <BookCardProfile key={book.id} data={book} />
+              ))}
           </FlexCardBook>
         </Section>
         <DetailsProfiler>
-          <Perfil />
+          <Perfil metrics={profile.metrics} />
         </DetailsProfiler>
       </LayoutMain>
     </>
