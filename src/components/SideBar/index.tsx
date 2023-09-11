@@ -31,7 +31,7 @@ export function SideBar() {
 
   const navItems: NavItemsProps = [
     {
-      label: 'Inícion',
+      label: 'Início',
       href: '/',
       icon: <ChartLineUp size={24} />,
     },

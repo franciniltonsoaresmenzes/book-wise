@@ -27,6 +27,7 @@ export default async function handle(
     include: {
       book: true,
     },
+    take: 4,
   })
 
   return res.status(201).json({ rating: UserLatest })
