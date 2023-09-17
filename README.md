@@ -9,3 +9,16 @@
 ## 📷 Preview
 
 <img src="./public/preview/preview.gif"/>
+
+
+## 🛠 As Principais Tecnologias utilizadas: 
+
+- [Prisma](https://www.prisma.io/)
+- [Next.js](https://nextjs.org/)
+- [Stitches](https://stitches.dev/)
+- [NextAuth.js](https://next-auth.js.org/)
+- [React Query](https://react-query.tanstack.com/)
+
+
+<p align="center" >Feito com 💜 by Rocketseat</p>
+
