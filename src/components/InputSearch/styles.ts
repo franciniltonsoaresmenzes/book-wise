@@ -15,6 +15,7 @@ export const ContentInput = styled('div', {
 
   ' > input': {
     outline: 'none',
+    width: '100%',
     background: 'none',
     color: '$gray400',
     border: 'none',

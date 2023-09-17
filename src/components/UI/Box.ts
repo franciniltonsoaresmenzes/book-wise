@@ -13,6 +13,11 @@ export const Box = styled('div', {
   transition: '.2s',
 
   variants: {
+    active: {
+      true: {
+        background: '$gray600',
+      },
+    },
     variant: {
       secundary: {
         background: '$gray600',

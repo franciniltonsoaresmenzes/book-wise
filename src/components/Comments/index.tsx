@@ -9,13 +9,14 @@ import Link from 'next/link'
 
 type Props = {
   data: RatingProps
+  active?: boolean
 }
 
-export function Comments({ data }: Props) {
+export function Comments({ data, active = false }: Props) {
   const createAt = dayjs(data.created_at).fromNow()
 
   return (
-    <Box>
+    <Box active={active}>
       <Header>
         <Author>
           <Link href={`/profile/${data.user.id}`}>

@@ -128,7 +128,11 @@ export function BookDialog({ children, bookId }: Props) {
 
             {!isFetching &&
               comments.map((comment) => (
-                <Comments key={comment.id} data={comment} />
+                <Comments
+                  key={comment.id}
+                  data={comment}
+                  active={user?.id === comment.user.id}
+                />
               ))}
           </Section>
         </Content>

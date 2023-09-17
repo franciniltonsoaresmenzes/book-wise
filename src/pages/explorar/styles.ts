@@ -3,7 +3,7 @@ import { styled } from '../../../stitches.config'
 export const ContentTags = styled('div', {
   display: 'flex',
   gap: '$3',
-  overflowX: 'scroll',
+  flexWrap: 'wrap',
   padding: '1rem 0 1rem 0',
 })
 

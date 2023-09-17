@@ -8,7 +8,7 @@ import { CaretLeft, MagnifyingGlass, User } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import { NextPageWithLayout } from '../_app.page'
 import {
   DetailsProfiler,
@@ -46,6 +46,7 @@ type Response = {
 }
 
 const Profile: NextPageWithLayout = () => {
+  const [filterValue, setFilterValue] = useState<string>('')
   const router = useRouter()
   const userIdPathname = router.query.userId as string
 
@@ -64,6 +65,13 @@ const Profile: NextPageWithLayout = () => {
   })
 
   if (!profile) return
+
+  const filterBook = profile?.books.filter((book) => {
+    return (
+      book.book.name.toLowerCase().includes(filterValue.toLowerCase()) ||
+      book.book.author.toLowerCase().includes(filterValue.toLowerCase())
+    )
+  })
 
   return (
     <>
@@ -87,10 +95,12 @@ const Profile: NextPageWithLayout = () => {
           <InputSearch
             icon={<MagnifyingGlass size={20} />}
             placeholder="Buscar livro avaliado"
+            onChange={(e) => setFilterValue(e.target.value)}
+            value={filterValue}
           />
           <FlexCardBook>
             {!isFetching &&
-              profile?.books.map((book) => (
+              filterBook.map((book) => (
                 <BookCardProfile key={book.id} data={book} />
               ))}
           </FlexCardBook>
